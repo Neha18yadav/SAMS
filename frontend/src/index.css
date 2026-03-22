@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --apple-blue: #0071e3;
+  --apple-red: #ff3b30;
+  --apple-green: #34c759;
+  --apple-amber: #ff9500;
+  --apple-grey: #86868b;
+  --apple-dark: #1d1d1f;
+  --apple-bg: #f5f5f7;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--apple-bg);
+  background-image: 
+    radial-gradient(at 100% 0%, hsla(210,100%,94%,1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(240,100%,96%,1) 0px, transparent 50%);
+  background-attachment: fixed;
+  color: var(--apple-dark);
+  transition: background-color 0.5s ease, color 0.5s ease, background-image 0.5s ease;
+}
+
+body.dark {
+  background-color: #0a0a0a;
+  background-image: 
+    radial-gradient(at 100% 0%, rgba(0, 113, 227, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(175, 82, 222, 0.05) 0px, transparent 50%);
+  color: #f5f5f7;
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/60 dark:bg-[#111111]/60 backdrop-blur-xl border border-white/40 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.04)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.2)] rounded-[2rem];
+  }
+  
+  .glass-panel {
+    @apply bg-white/40 dark:bg-[#111111]/40 backdrop-blur-lg border border-white/30 dark:border-white/10 rounded-[2.5rem];
+  }
+
+  .sams-button-primary {
+    @apply bg-black dark:bg-white text-white dark:text-black px-6 py-3 rounded-full font-semibold transition-all hover:bg-slate-800 dark:hover:bg-gray-200 active:scale-95 disabled:opacity-50;
+  }
+
+  .sams-button-secondary {
+    @apply bg-white/60 dark:bg-white/5 backdrop-blur-md border border-slate-200/50 dark:border-white/10 text-slate-700 dark:text-gray-300 px-6 py-3 rounded-full font-semibold transition-all hover:bg-white dark:hover:bg-white/10 active:scale-95;
+  }
+
+  .sams-input {
+    @apply bg-white/50 dark:bg-[#111111]/50 border border-slate-200/50 dark:border-white/10 rounded-2xl px-5 py-3 outline-none focus:border-blue-500/50 dark:focus:border-blue-500/50 focus:bg-white dark:focus:bg-[#1a1a1a] transition-all text-sm font-medium dark:text-white;
+  }
+
+  /* Custom Scrollbar for SAMS */
+  .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #d2d2d7; border-radius: 10px; }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #86868b; }
+}
+
+@layer utilities {
+  .text-apple-grey { color: var(--apple-grey); }
+  .text-apple-dark { color: var(--apple-dark); }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-sams-fade {
+  animation: fadeIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
