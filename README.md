@@ -1,134 +1,136 @@
+# SAMS — Smart Attendance Management System
 
-## SAMS — Smart Attendance Management System
-SAMS is an AI-powered attendance tracking system that uses face recognition and large language models (LLMs) to automate and analyze attendance in educational institutions.
+[![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
+[![Flask](https://img.shields.io/badge/Flask-3.0-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Vite](https://img.shields.io/badge/Vite-7.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 
-It replaces traditional roll-calls with a fast, secure, and data-driven solution.
+SAMS is an enterprise-grade, AI-powered attendance tracking platform that combines **Biometric Face Recognition** with **Large Language Models (LLMs)** to automate, secure, and analyze attendance in educational environments.
 
-## Features
-🤖 AI-Powered Face Recognition
-Real-time face detection using OpenCV and Dlib
+---
 
-Automatic attendance marking with confidence scores
+## 🚀 Key Features
 
-Secure storage of facial encodings in SQLite
+### 🤖 Intelligent Biometrics
+*   **Real-time Recognition:** High-speed face detection using OpenCV and Dlib.
+*   **Confidence Scoring:** Automatic attendance marking with precision-adjusted confidence intervals.
+*   **Biometric Security:** Facial encodings are securely pickled and stored in an encrypted-ready SQLite architecture.
 
-## AI Insights
-Integration with Groq (Llama 3) for attendance analysis
+### 🧠 SAMS AI Engine
+*   **Analysis:** Powered by **Groq (Llama 3)** for deep-dive attendance pattern analysis.
+*   **Anomaly Detection:** Automatically flags irregular attendance patterns and shifts in student behavior.
+*   **Actionable Insights:** Generates strategic recommendations for faculty to improve engagement.
 
-Detects anomalies in student attendance
+### 📊 Professional Analytics
+*   **Interactive Dashboards:** Dedicated, high-performance interfaces for both Faculty and Students.
+*   **Visual Trends:** Real-time data visualization using Chart.js.
+*   **Digital Governance:** Built-in leave request management and approval workflow.
 
-Provides actionable suggestions for faculty
+---
 
-## Analytics & Dashboard
-Separate dashboards for Admin and Students
+## 🛠️ Tech Stack
 
-Attendance visualization using Chart.js
+### Frontend
+- **Framework:** React 19 (Vite)
+- **Styling:** Tailwind CSS (Modern Glassmorphism)
+- **Icons:** Lucide React
+- **Charts:** Chart.js + React-Chartjs-2
+- **State Management:** React Context API
 
-Leave request and approval system
+### Backend
+- **Core:** Flask (Python)
+- **Database:** SQLAlchemy (SQLite)
+- **Security:** JWT (JSON Web Tokens) & Werkzeug Password Hashing
+- **AI/ML:** OpenCV, Face_recognition, Groq API
+- **Data:** Pandas & NumPy
 
-## User Experience
-Clean UI with dark/light mode
+---
 
-Fully responsive design
+## 📁 Project Structure
 
-Modern glassmorphism styling
-
-## Tech Stack
-## Frontend
-React 19
-
-Vite
-
-Tailwind CSS
-
-Chart.js
-
-Axios
-
-## Backend
-Flask
-
-Flask-SQLAlchemy
-
-Flask-CORS
-
-JWT Authentication
-
-AI & Data
-OpenCV
-
-face_recognition
-
-Groq API (Llama 3)
-
-Pandas
-
-## Database
-SQLite (SQLAlchemy ORM)
-
-## Project Structure
+```text
 E-attendance/
-├── frontend/
+├── frontend/              # React Application (Vite)
 │   ├── src/
-│   │   ├── components/
-│   │   ├── context/
-│   │   ├── pages/
-│   │   └── App.jsx
-│   └── vercel.json
+│   │   ├── components/    # Reusable UI Components
+│   │   ├── pages/         # Dashboard, AI Insights, Students, etc.
+│   │   └── context/       # Auth and Global State
+│   └── public/            # Static Assets
 │
-├── backend/
+├── backend/               # Flask API
 │   ├── app/
-│   │   ├── camera.py
-│   │   ├── routes.py
-│   │   ├── models.py
-│   │   └── jwt_utils.py
-│   ├── requirements.txt
-│   └── run.py
+│   │   ├── camera.py      # Face Recognition Logic
+│   │   ├── routes.py      # API Endpoints
+│   │   ├── models.py      # DB Schema
+│   │   └── jwt_utils.py   # Auth Utilities
+│   ├── instance/          # Local Configuration
+│   └── run.py             # Entry Point
 │
-└── app.db
-## Installation & Setup
-Prerequisites
-Python 3.9+
+└── app.db                 # Primary Data Storage
+```
 
-Node.js 18+
+---
 
-Groq API Key
+## ⚙️ Installation & Setup
 
-Backend Setup
+### Prerequisites
+- Python 3.9 or higher
+- Node.js 18 or higher
+- A [Groq API Key](https://console.groq.com/) (for AI features)
+
+### 1. Backend Setup
+```bash
 cd backend
-python -m venv venv
 
-## Activate environment
-source venv/bin/activate      (Mac/Linux)
-venv\Scripts\activate         (Windows)
+# Create and activate virtual environment
+python3 -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
+# Install dependencies
 pip install -r requirements.txt
 
-## Create .env file
-GROQ_API_KEY=your_key_here
+# Create .env file
+echo "GROQ_API_KEY=your_key_here" > .env
 
+# Initialize Database & Admin (Required)
+python3 setup_admin.py
+
+# Run the server
 python run.py
-Frontend Setup
+```
+
+### 2. Frontend Setup
+```bash
 cd frontend
+
+# Install dependencies
 npm install
+
+# Run in development mode
 npm run dev
-## Technical Highlights
-Optimized face recognition for real-time performance
+```
 
-Secure JWT-based authentication
+---
 
-Fast facial matching using encoded NumPy arrays
+## 🔐 Default Credentials
 
-AI-powered insights using structured prompts
+After running `setup_admin.py`, you can log in with:
+- **Username:** `admin`
+- **Password:** `admin`
 
-Data analysis with Pandas
+---
 
-## Use Cases
-Schools and Colleges
+## 🛡️ Technical Highlights
 
-Coaching Institutes
+*   **Optimization:** Uses facial matching against pre-encoded NumPy arrays for sub-millisecond recognition.
+*   **Scalability:** Modular architecture allowing for easy integration of additional biometric sensors.
+*   **AI Context:** Custom-built prompt engineering that injects real-time DB context into LLM queries.
 
-Corporate Training
+---
 
-## Support
-If you like this project, give it a star on GitHub ⭐
+## 🌟 Support & Contribution
+
+If you find this project useful, please consider giving it a **Star** on GitHub!
+
+**Developed with ❤️ by Neha Yadav**
