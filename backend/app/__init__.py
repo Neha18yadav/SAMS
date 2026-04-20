@@ -16,7 +16,13 @@ def create_app(config_class=Config):
 
     # Initialize extensions
     db.init_app(app)
-    CORS(app)
+    CORS(app, origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+        r"https://.*\.vercel\.app",
+        # Add your custom Vercel domain here if you have one, e.g.:
+        # "https://sams.yourdomain.com",
+    ], supports_credentials=True)
 
     # Register blueprints (to be created)
     from app.routes import main

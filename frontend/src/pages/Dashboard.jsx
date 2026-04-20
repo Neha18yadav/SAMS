@@ -399,7 +399,10 @@ const Dashboard = () => {
                                             </div>
                                             <div className="min-w-0 flex-1">
                                                 <p className="text-[14px] font-semibold text-[#1d1d1f] dark:text-white truncate">{record.student_name}</p>
-                                                <p className="text-[10px] font-bold text-[#86868b] uppercase tracking-wider">Roll {record.student_roll}</p>
+                                                <p className="text-[10px] font-bold text-[#86868b] uppercase tracking-wider">
+                                                    Roll {record.student_roll}
+                                                    {record.section && <span className="ml-2 text-[#0071e3]">{record.section} {record.student_group ? `(${record.student_group})` : ''}</span>}
+                                                </p>
                                             </div>
                                         </div>
                                         <div className="text-right flex-shrink-0 ml-4">

@@ -20,4 +20,19 @@ for root, dirs, files in os.walk('.'):
                 print("Added course_code column to attendance successfully.")
             except Exception as e:
                 print("Notice (attendance): ", e)
+                
+            try:
+                conn.execute("ALTER TABLE student ADD COLUMN section VARCHAR(20) DEFAULT ''")
+                conn.commit()
+                print("Added section column to student successfully.")
+            except Exception as e:
+                print("Notice (student section): ", e)
+
+            try:
+                conn.execute("ALTER TABLE student ADD COLUMN student_group VARCHAR(20) DEFAULT ''")
+                conn.commit()
+                print("Added student_group column to student successfully.")
+            except Exception as e:
+                print("Notice (student group): ", e)
+
             conn.close()

@@ -38,3 +38,7 @@ instance/
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Biometric Samples
+backend/app/static/faces/*
+!backend/app/static/faces/.gitkeep

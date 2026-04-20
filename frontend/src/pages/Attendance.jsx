@@ -284,15 +284,21 @@ const Attendance = () => {
                                                 </div>
                                                 <div className="min-w-0">
                                                     <p className="text-[14px] font-bold text-[#1d1d1f] dark:text-white truncate leading-tight tracking-tight">{record.student_name}</p>
-                                                    <p className="text-[11px] font-medium text-[#86868b] mt-0.5 truncate flex items-center gap-1.5">
-                                                        <span>{record.student_roll}</span>
-                                                        {record.course_code && (
-                                                            <>
-                                                                <span className="w-1 h-1 rounded-full bg-[#d2d2d7]"></span>
-                                                                <span className="text-[#0071e3] font-bold tracking-wide">{record.course_code}</span>
-                                                            </>
-                                                        )}
-                                                    </p>
+                                                <p className="text-[11px] font-medium text-[#86868b] mt-0.5 truncate flex items-center gap-1.5">
+                                                    <span>{record.student_roll}</span>
+                                                    {record.section && (
+                                                        <>
+                                                            <span className="w-1 h-1 rounded-full bg-[#d2d2d7]"></span>
+                                                            <span className="font-bold tracking-wide">{record.section} {record.student_group ? `(Gr ${record.student_group})` : ''}</span>
+                                                        </>
+                                                    )}
+                                                    {record.course_code && (
+                                                        <>
+                                                            <span className="w-1 h-1 rounded-full bg-[#d2d2d7]"></span>
+                                                            <span className="text-[#0071e3] font-bold tracking-wide">{record.course_code}</span>
+                                                        </>
+                                                    )}
+                                                </p>
                                                 </div>
                                             </div>
                                             <div className="flex flex-col items-end gap-1.5 flex-shrink-0 ml-3">

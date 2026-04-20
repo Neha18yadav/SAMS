@@ -8,7 +8,7 @@ const Students = () => {
     const [students, setStudents] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [showModal, setShowModal] = useState(false);
-    const [newStudent, setNewStudent] = useState({ name: '', roll_no: '', photo: null });
+    const [newStudent, setNewStudent] = useState({ name: '', roll_no: '', section: '', student_group: '', photo: null });
     const [loading, setLoading] = useState(true);
     const [isEnrolling, setIsEnrolling] = useState(false);
 
@@ -90,6 +90,8 @@ const Students = () => {
         const formData = new FormData();
         formData.append('name', newStudent.name);
         formData.append('roll_no', newStudent.roll_no);
+        formData.append('section', newStudent.section);
+        formData.append('student_group', newStudent.student_group);
         formData.append('photo', newStudent.photo);
 
         try {
@@ -97,7 +99,7 @@ const Students = () => {
             setShowModal(false);
             setCapturedImage(null);
             fetchStudents();
-            setNewStudent({ name: '', roll_no: '', photo: null });
+            setNewStudent({ name: '', roll_no: '', section: '', student_group: '', photo: null });
         } catch (err) {
             alert(`Enrollment failed: ${err.response?.data?.error || 'System error. Please ensure the student is well-lit and not already registered.'}`);
         } finally {
@@ -173,6 +175,7 @@ const Students = () => {
                             <tr className="bg-[#f5f5f7]/50 border-b border-[#d2d2d7]/30">
                                 <th className="px-10 py-5 text-[11px] font-black text-[#86868b] uppercase tracking-[0.2em]">Biometric Profile</th>
                                 <th className="px-10 py-5 text-[11px] font-black text-[#86868b] uppercase tracking-[0.2em]">Identification UID</th>
+                                <th className="px-10 py-5 text-[11px] font-black text-[#86868b] uppercase tracking-[0.2em]">Academic Cohort</th>
                                 <th className="px-10 py-5 text-[11px] font-black text-[#86868b] uppercase tracking-[0.2em]">Security Status</th>
                                 <th className="px-10 py-5 text-[11px] font-black text-[#86868b] uppercase tracking-[0.2em] text-right">Database Ops</th>
                             </tr>
@@ -187,7 +190,7 @@ const Students = () => {
                                 </tr>
                             ) : filteredStudents.length === 0 ? (
                                 <tr>
-                                    <td colSpan="4" className="py-24 text-center">
+                                    <td colSpan="5" className="py-24 text-center">
                                         <div className="opacity-20 space-y-4">
                                             <UserMinus size={48} className="mx-auto" />
                                             <p className="text-[13px] font-black uppercase tracking-widest">No matching entities found</p>
@@ -220,6 +223,12 @@ const Students = () => {
                                             <span className="font-mono text-[14px] font-bold text-[#0071e3] bg-[#0071e3]/5 px-3 py-1.5 rounded-xl border border-[#0071e3]/10">
                                                 {s.roll_no}
                                             </span>
+                                        </td>
+                                        <td className="px-10 py-6">
+                                            <div>
+                                                <p className="text-[13px] font-bold text-[#1d1d1f] dark:text-white uppercase tracking-wider">{s.section || 'Unassigned'}</p>
+                                                <p className="text-[11px] font-bold text-[#86868b] mt-1">Group {s.student_group || '-'}</p>
+                                            </div>
                                         </td>
                                         <td className="px-10 py-6">
                                             <div className="flex items-center gap-2">
@@ -288,6 +297,29 @@ const Students = () => {
                                         className="w-full px-6 py-4 bg-[#f5f5f7] border border-transparent rounded-[1.5rem] focus:bg-white focus:border-[#0071e3]/30 outline-none text-[15px] font-semibold text-[#1d1d1f] dark:text-white transition-all"
                                         value={newStudent.roll_no}
                                         onChange={(e) => setNewStudent({ ...newStudent, roll_no: e.target.value })}
+                                    />
+                                </div>
+                            </div>
+                            
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                                <div className="space-y-3">
+                                    <label className="text-[11px] font-bold text-[#86868b] uppercase tracking-widest ml-1">Section</label>
+                                    <input
+                                        type="text"
+                                        placeholder="e.g. 23BDA-2"
+                                        className="w-full px-6 py-4 bg-[#f5f5f7] border border-transparent rounded-[1.5rem] focus:bg-white focus:border-[#0071e3]/30 outline-none text-[15px] font-semibold text-[#1d1d1f] dark:text-white transition-all"
+                                        value={newStudent.section}
+                                        onChange={(e) => setNewStudent({ ...newStudent, section: e.target.value })}
+                                    />
+                                </div>
+                                <div className="space-y-3">
+                                    <label className="text-[11px] font-bold text-[#86868b] uppercase tracking-widest ml-1">Student Group</label>
+                                    <input
+                                        type="text"
+                                        placeholder="e.g. A"
+                                        className="w-full px-6 py-4 bg-[#f5f5f7] border border-transparent rounded-[1.5rem] focus:bg-white focus:border-[#0071e3]/30 outline-none text-[15px] font-semibold text-[#1d1d1f] dark:text-white transition-all"
+                                        value={newStudent.student_group}
+                                        onChange={(e) => setNewStudent({ ...newStudent, student_group: e.target.value })}
                                     />
                                 </div>
                             </div>

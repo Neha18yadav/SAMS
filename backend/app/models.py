@@ -11,6 +11,8 @@ class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     roll_no = db.Column(db.String(20), unique=True, nullable=False)
+    section = db.Column(db.String(20), default='')
+    student_group = db.Column(db.String(20), default='')
     face_encoding = db.Column(db.PickleType, nullable=True) # Identifying data
     photo_path = db.Column(db.String(200))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
@@ -25,3 +27,14 @@ class Attendance(db.Model):
     confidence = db.Column(db.Float, nullable=True)
     
     student = db.relationship('Student', backref=db.backref('attendance_records', cascade='all, delete-orphan'))
+
+class LeaveRequest(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey('student.id', ondelete='CASCADE'), nullable=False)
+    date_from = db.Column(db.Date, nullable=False)
+    date_to = db.Column(db.Date, nullable=False)
+    reason = db.Column(db.String(500), nullable=False)
+    status = db.Column(db.String(20), default='Pending') # Pending, Approved, Rejected
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    student = db.relationship('Student', backref=db.backref('leave_requests', cascade='all, delete-orphan'))

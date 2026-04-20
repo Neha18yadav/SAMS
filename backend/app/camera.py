@@ -33,14 +33,33 @@ class VideoCamera(object):
 
     def start_recognition(self, course_code=None):
         if not self.is_running:
-            self.video = cv2.VideoCapture(0)
-            if not self.video.isOpened():
-                print("Error: Could not open camera.")
+            # Try camera indices 0, 1, 2 to find a working one
+            found_camera = False
+            for index in [0, 1, 2]:
+                print(f"Attempting to open camera at index {index}...")
+                cap = cv2.VideoCapture(index)
+                if cap.isOpened():
+                    # Test if we can actually read a frame
+                    success, _ = cap.read()
+                    if success:
+                        self.video = cap
+                        print(f"Successfully opened camera at index {index}")
+                        found_camera = True
+                        break
+                    else:
+                        print(f"Camera at index {index} opened but failed to capture frame.")
+                        cap.release()
+                else:
+                    print(f"Could not open camera at index {index}.")
+
+            if not found_camera:
+                print("Error: No functional camera found.")
                 return False
+
             self.is_running = True
             self.current_course_code = course_code
             self.last_marked = {} # Clear throttle for fresh session
-            print(f"Recognition started for {course_code or 'General'} - Camera Opened")
+            print(f"Recognition started for {course_code or 'General'} - Camera Active")
             return True
         return True
 
@@ -82,7 +101,12 @@ class VideoCamera(object):
 
         success, image = self.video.read()
         if not success:
-            return None
+            # If capture fails mid-stream, return error frame
+            error_image = np.zeros((480, 640, 3), np.uint8)
+            font = cv2.FONT_HERSHEY_DUPLEX
+            cv2.putText(error_image, "Capture Error", (200, 240), font, 1.0, (0, 0, 255), 2)
+            ret, jpeg = cv2.imencode('.jpg', error_image)
+            return jpeg.tobytes()
 
         # Resize for faster processing
         small_frame = cv2.resize(image, (0, 0), fx=0.25, fy=0.25)

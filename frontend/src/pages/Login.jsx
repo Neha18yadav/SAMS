@@ -9,7 +9,7 @@ const Login = ({ onLogin }) => {
     const [isLogin, setIsLogin] = useState(true);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [signupRole, setSignupRole] = useState('user'); 
+    const [signupRole, setSignupRole] = useState('user');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ const Login = ({ onLogin }) => {
             if (!isLogin) payload.role = signupRole;
 
             const res = await axios.post(`${API}${endpoint}`, payload);
-            
+
             if (isLogin) {
                 const userRole = res.data.role || 'user';
                 onLogin(userRole, res.data.token);
@@ -83,14 +83,14 @@ const Login = ({ onLogin }) => {
                                     onClick={() => setSignupRole('user')}
                                     className={`flex-1 py-3 rounded-[14px] text-[11px] font-bold uppercase tracking-widest transition-all ${signupRole === 'user' ? 'bg-white text-[#1d1d1f] shadow-sm' : 'text-[#86868b]'}`}
                                 >
-                                    Observer
+                                    Student
                                 </button>
                                 <button
                                     type="button"
                                     onClick={() => setSignupRole('admin')}
                                     className={`flex-1 py-3 rounded-[14px] text-[11px] font-bold uppercase tracking-widest transition-all ${signupRole === 'admin' ? 'bg-white text-[#1d1d1f] shadow-sm' : 'text-[#86868b]'}`}
                                 >
-                                    Architect
+                                    Faculty
                                 </button>
                             </div>
                         )}
@@ -142,8 +142,8 @@ const Login = ({ onLogin }) => {
                     </form>
 
                     <div className="mt-10 text-center border-t border-[#f5f5f7] pt-8">
-                        <button 
-                            type="button" 
+                        <button
+                            type="button"
                             onClick={() => { setIsLogin(!isLogin); setError(''); setPassword(''); }}
                             className="text-[13px] font-semibold text-[#0071e3] hover:text-[#0071e3]/80 transition-colors"
                         >
@@ -151,12 +151,12 @@ const Login = ({ onLogin }) => {
                         </button>
                     </div>
                 </div>
-                
+
                 <p className="mt-8 text-center text-[10px] text-[#86868b] font-bold uppercase tracking-[0.2em]">
                     SAMS Terminal · v2.4.0 High-Security
                 </p>
             </div>
-            
+
             <style>{`
                 .pl-13 { padding-left: 3.25rem; }
             `}</style>

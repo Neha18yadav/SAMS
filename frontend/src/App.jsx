@@ -1,12 +1,16 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
+import StudentDashboard from './pages/StudentDashboard';
 import Students from './pages/Students';
 import Reports from './pages/Reports';
 import Login from './pages/Login';
 import Attendance from './pages/Attendance';
 import Landing from './pages/Landing';
 import AIInsights from './pages/AIInsights';
+import Timetable from './pages/Timetable';
+import LeaveRequests from './pages/LeaveRequests';
+import Settings from './pages/Settings';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ThemeProvider } from './context/ThemeContext';
@@ -96,11 +100,16 @@ function App() {
                             isAuthenticated ? <Navigate to="/dashboard" replace /> : <Login onLogin={handleLogin} />
                         } />
                         
-                        <Route path="/dashboard" element={<ProtectedRoute isAuthenticated={isAuthenticated} userRole={userRole}><Dashboard /></ProtectedRoute>} />
+                        <Route path="/dashboard" element={<ProtectedRoute isAuthenticated={isAuthenticated} userRole={userRole}>{userRole === 'user' ? <StudentDashboard /> : <Dashboard />}</ProtectedRoute>} />
+                        <Route path="/timetable" element={<ProtectedRoute isAuthenticated={isAuthenticated} userRole={userRole}><Timetable /></ProtectedRoute>} />
+                        <Route path="/leaves" element={<ProtectedRoute isAuthenticated={isAuthenticated} userRole={userRole}><LeaveRequests /></ProtectedRoute>} />
+                        
                         <Route path="/students" element={<ProtectedRoute isAuthenticated={isAuthenticated} allowedRoles={['admin']} userRole={userRole}><Students /></ProtectedRoute>} />
                         <Route path="/attendance" element={<ProtectedRoute isAuthenticated={isAuthenticated} allowedRoles={['admin']} userRole={userRole}><Attendance /></ProtectedRoute>} />
                         <Route path="/reports" element={<ProtectedRoute isAuthenticated={isAuthenticated} allowedRoles={['admin']} userRole={userRole}><Reports /></ProtectedRoute>} />
                         <Route path="/ai-insights" element={<ProtectedRoute isAuthenticated={isAuthenticated} allowedRoles={['admin']} userRole={userRole}><AIInsights /></ProtectedRoute>} />
+                        
+                        <Route path="/settings" element={<ProtectedRoute isAuthenticated={isAuthenticated} userRole={userRole}><Settings /></ProtectedRoute>} />
 
                         <Route path="*" element={<Navigate to="/" replace />} />
                     </Routes>

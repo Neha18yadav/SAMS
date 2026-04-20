@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, FileText, LogOut, Camera, ShieldCheck, Brain, Sparkles, Command } from 'lucide-react';
+import { LayoutDashboard, Users, FileText, LogOut, Camera, ShieldCheck, Brain, Sparkles, Command, Calendar, Clock, Settings as SettingsIcon } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 
@@ -6,11 +6,14 @@ const Sidebar = ({ userRole }) => {
     const location = useLocation();
 
     const menuItems = [
-        { name: 'Dashboard', icon: LayoutDashboard, path: '/dashboard', roles: ['admin', 'user'] },
+        { name: userRole === 'user' ? 'My Subject Area' : 'Dashboard', icon: LayoutDashboard, path: '/dashboard', roles: ['admin', 'user'] },
+        { name: 'Schedule Grid', icon: Calendar, path: '/timetable', roles: ['admin', 'user'] },
+        { name: 'Leave Portal', icon: Clock, path: '/leaves', roles: ['admin', 'user'] },
         { name: 'Mark Attendance', icon: Camera, path: '/attendance', roles: ['admin'] },
         { name: 'Student Roster', icon: Users, path: '/students', roles: ['admin'] },
         { name: 'AI Intelligence', icon: Brain, path: '/ai-insights', roles: ['admin'], isAI: true },
         { name: 'Reports Archive', icon: FileText, path: '/reports', roles: ['admin'] },
+        { name: 'System Settings', icon: SettingsIcon, path: '/settings', roles: ['admin', 'user'] },
     ];
 
     const visibleItems = menuItems.filter(item => item.roles.includes(userRole || 'user'));
