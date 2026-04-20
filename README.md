@@ -132,5 +132,3 @@ After running `setup_admin.py`, you can log in with:
 ## 🌟 Support & Contribution
 
 If you find this project useful, please consider giving it a **Star** on GitHub!
-
-**Developed with ❤️ by Neha Yadav**
